@@ -9,14 +9,14 @@ public class InfoTest {
 
     /* double id() */
     @Test
-    public void idTest_T33() {
+    public void idTest_T44() {
         Integer i = null;
         Info<String, Integer> info = new Info<String, Integer>(23.25, 120.55, 123, "2", Optional.fromNullable(i));
         assertTrue(!info.id().isPresent());
     }
 
     @Test
-    public void idTest_T34() {
+    public void idTest_T45() {
         Info<String, Integer> info = new Info<String, Integer>(23.25, 120.55, 123, "2", Optional.of(30));
         assertEquals(Optional.of(30), info.id());
     }
@@ -24,19 +24,19 @@ public class InfoTest {
 
     /* double lat() */
     @Test
-    public void latTest_T35() {
+    public void latTest_T46() {
         Info<String, Integer> info = new Info<String, Integer>(-23.25, 120.55, 123, "2", Optional.of(30));
         assertEquals(-23.25, info.lat(), 0);
     }
 
     @Test
-    public void latTest_T36() {
+    public void latTest_T47() {
         Info<String, Integer> info = new Info<String, Integer>(0, 120.55, 123, "2", Optional.of(30));
         assertEquals(0, info.lat(), 0);
     }
 
     @Test
-    public void latTest_T37() {
+    public void latTest_T48() {
         Info<String, Integer> info = new Info<String, Integer>(23.25, 120.55, 123, "2", Optional.of(30));
         assertEquals(23.25, info.lat(), 0);
     }
@@ -44,19 +44,19 @@ public class InfoTest {
 
     /* double lon() */
     @Test
-    public void lonTest_T38() {
+    public void lonTest_T49() {
         Info<String, Integer> info = new Info<String, Integer>(23.25, -120.55, 123, "2", Optional.of(30));
         assertEquals(-120.55, info.lon(), 0);
     }
 
     @Test
-    public void lonTest_T39() {
+    public void lonTest_T50() {
         Info<String, Integer> info = new Info<String, Integer>(23.25, 0, 123, "2", Optional.of(30));
         assertEquals(0, info.lon(), 0);
     }
 
     @Test
-    public void lonTest_T40() {
+    public void lonTest_T51() {
         Info<String, Integer> info = new Info<String, Integer>(23.25, 120.55, 123, "2", Optional.of(30));
         assertEquals(120.55, info.lon(), 0);
     }
@@ -64,19 +64,19 @@ public class InfoTest {
 
     /* long time() */
     @Test
-    public void timeTest_T41() {
+    public void timeTest_T52() {
         Info<String, Integer> info = new Info<String, Integer>(23.25, 120.55, -123, "2", Optional.of(30));
         assertEquals(-123, info.time());
     }
 
     @Test
-    public void timeTest_T42() {
+    public void timeTest_T53() {
         Info<String, Integer> info = new Info<String, Integer>(23.25, 120.55, 0, "2", Optional.of(30));
         assertEquals(0, info.time());
     }
 
     @Test
-    public void timeTest_T43() {
+    public void timeTest_T54() {
         Info<String, Integer> info = new Info<String, Integer>(23.25, 120.55, 123, "2", Optional.of(30));
         assertEquals(123, info.time());
     }
@@ -84,13 +84,13 @@ public class InfoTest {
 
     /* long value() */
     @Test
-    public void valueTest_T44() {
+    public void valueTest_T55() {
         Info<String, Integer> info = new Info<String, Integer>(23.25, 120.55, 123, "", Optional.of(30));
         assertEquals("", info.value());
     }
 
     @Test
-    public void valueTest_T45() {
+    public void valueTest_T56() {
         Info<String, Integer> info = new Info<String, Integer>(23.25, 120.55, 123, "2", Optional.of(30));
         assertEquals("2", info.value());
     }
@@ -98,14 +98,14 @@ public class InfoTest {
 
     /* String toString() */
     @Test
-    public void toStringTest_T46() {
+    public void toStringTest_T57() {
         Integer i = null;
         Info<String, Integer> info = new Info<String, Integer>(23.25, 120.55, 123, "2", Optional.fromNullable(i));
         assertEquals("Info [lat=23.25, lon=120.55, time=123, value=2, id=Optional.absent()]", info.toString());
     }
 
     @Test
-    public void toStringTest_T47() {
+    public void toStringTest_T58() {
         Info<String, Integer> info = new Info<String, Integer>(23.25, 120.55, 123, "2", Optional.of(30));
         assertEquals("Info [lat=23.25, lon=120.55, time=123, value=2, id=Optional.of(30)]", info.toString());
     }

@@ -69,4 +69,77 @@ public class GeoHashTest {
         assertEquals("29jt", adjacentHash);
     }
 
+
+    /* String encodeHash(double latitude, double longitude, int length) */
+    @Test
+    public void encodeHashTest_T33() {
+        String encodeHash = GeoHash.encodeHash(-90, -180, 4);
+        assertEquals("0000", encodeHash);
+    }
+
+    @Test
+    public void encodeHashTest_T34() {
+        String encodeHash = GeoHash.encodeHash(-90, 0, 4);
+        assertEquals("h000", encodeHash);
+    }
+
+    @Test
+    public void encodeHashTest_T35() {
+        String encodeHash = GeoHash.encodeHash(-90, 180, 4);
+        assertEquals("pbpb", encodeHash);
+    }
+
+    @Test
+    public void encodeHashTest_T36() {
+        String encodeHash = GeoHash.encodeHash(0, -180, 4);
+        assertEquals("8000", encodeHash);
+    }
+
+    @Test
+    public void encodeHashTest_T37() {
+        String encodeHash = GeoHash.encodeHash(0, 0, 4);
+        assertEquals("s000", encodeHash);
+    }
+
+    @Test
+    public void encodeHashTest_T38() {
+        String encodeHash = GeoHash.encodeHash(0, 180, 4);
+        assertEquals("xbpb", encodeHash);
+    }
+
+    @Test
+    public void encodeHashTest_T39() {
+        String encodeHash = GeoHash.encodeHash(90, -180, 4);
+        assertEquals("bpbp", encodeHash);
+    }
+
+    @Test
+    public void encodeHashTest_T40() {
+        String encodeHash = GeoHash.encodeHash(90, 0, 4);
+        assertEquals("upbp", encodeHash);
+    }
+
+    @Test
+    public void encodeHashTest_T41() {
+        String encodeHash = GeoHash.encodeHash(90, 180, 4);
+        assertEquals("zzzz", encodeHash);
+    }
+
+
+    /* decodeHash(String geohash) */
+    @Test
+    public void decodeHash_T42() {
+        thrown.expect(NullPointerException.class);
+        thrown.expectMessage("geohash cannot be null");
+        GeoHash.decodeHash(null);
+    }
+
+    @Test
+    public void decodeHash_T43() {
+        LatLong latlong = new LatLong(90, 0);
+        LatLong decodeHash = GeoHash.decodeHash("upbp");
+
+        assertEquals(latlong.getLat(), decodeHash.getLat(), 1);
+        assertEquals(latlong.getLon(), decodeHash.getLon(), 1);
+    }
 }
