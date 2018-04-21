@@ -159,4 +159,20 @@ public class GeoHashTest {
         assertEquals(assertHash, decodeHash);
     }
 
+    @Test
+    public void decodeHash_T3() {
+        thrown.expect(NullPointerException.class);
+        thrown.expectMessage("geohash cannot be null");
+        GeoHash.decodeHash(null);
+    }
+
+    @Test
+    public void decodeHash_T4() {
+        LatLong latlong = new LatLong(90, 0);
+        LatLong decodeHash = GeoHash.decodeHash("upbp");
+
+        assertEquals(latlong.getLat(), decodeHash.getLat(), 1);
+        assertEquals(latlong.getLon(), decodeHash.getLon(), 1);
+    }
+
 }
