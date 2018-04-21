@@ -142,4 +142,21 @@ public class GeoHashTest {
         assertEquals(latlong.getLat(), decodeHash.getLat(), 1);
         assertEquals(latlong.getLon(), decodeHash.getLon(), 1);
     }
+
+
+    /* encodeHashToLong(double latitude, double longitude, int length) */
+    @Test
+    public void encodeHashToLong_T1() {
+        long decodeHash = GeoHash.encodeHashToLong(23, 120, 0);
+        long assertHash = Long.parseLong("0");
+        assertEquals(assertHash, decodeHash);
+    }
+
+    @Test
+    public void encodeHashToLong_T2() {
+        long decodeHash = GeoHash.encodeHashToLong(23, 120, 4);
+        long assertHash = Long.parseLong("-1863821742661697532");
+        assertEquals(assertHash, decodeHash);
+    }
+
 }
