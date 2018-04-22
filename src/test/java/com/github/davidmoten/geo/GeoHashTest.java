@@ -1,5 +1,6 @@
 package com.github.davidmoten.geo;
 
+import com.google.common.collect.Sets;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -161,9 +162,11 @@ public class GeoHashTest {
 
     @Test
     public void decodeHash_T3() {
-        thrown.expect(NullPointerException.class);
-        thrown.expectMessage("geohash cannot be null");
-        GeoHash.decodeHash(null);
+        LatLong latlong = new LatLong(0, 0);
+        LatLong decodeHash = GeoHash.decodeHash("");
+
+        assertEquals(latlong.getLat(), decodeHash.getLat(), 1);
+        assertEquals(latlong.getLon(), decodeHash.getLon(), 1);
     }
 
     @Test
@@ -175,37 +178,64 @@ public class GeoHashTest {
         assertEquals(latlong.getLon(), decodeHash.getLon(), 1);
     }
 
-    // 1 3 4 5 6 8
     @Test
-    public void coverBoundingBoxMaxHashes_T5() {
+    public void decodeHash_T5() {
         thrown.expect(NullPointerException.class);
-        Coverage coverage = GeoHash.coverBoundingBoxMaxHashes(23, 120, 20, 125, 0);
-        coverage.getHashes();
+        GeoHash.decodeHash(null);
     }
 
-    // 1 3 4 5 6 7 4 9
     @Test
     public void coverBoundingBoxMaxHashes_T6() {
-        Coverage coverage = GeoHash.coverBoundingBoxMaxHashes(23, 120, 23, 120, 4);
+        Coverage coverage = GeoHash.coverBoundingBoxMaxHashes(80.0, 55.0, 30.0, 60.0, 5);
+        assertEquals("[t, v]", coverage.getHashes().toString());
+    }
+
+    @Test
+    public void coverBoundingBoxMaxHashes_T7() {
+        Coverage coverage = GeoHash.coverBoundingBoxMaxHashes(80.0, 55.0, 50.0, 60.0, 5);
+        assertEquals("[v]", coverage.getHashes().toString());
+    }
+
+    @Test
+    public void coverBoundingBoxMaxHashes_T8() {
+        Coverage coverage = GeoHash.coverBoundingBoxMaxHashes(80.0, 55.0, 50.0, 60.0, 0);
+        assertNull(coverage);
+    }
+
+    @Test
+    public void coverBoundingBoxMaxHashes_T9() {
+        Coverage coverage = GeoHash.coverBoundingBoxMaxHashes(23.0, 120.0, 23.0, 120.0, 4);
         assertEquals("[wsj6fej2dwv2]", coverage.getHashes().toString());
     }
 
     @Test
-    public void fromLongToString_T7() {
+    public void fromLongToString_T10() {
         thrown.expect(IllegalArgumentException.class);
         GeoHash.fromLongToString(0xf);
     }
 
     @Test
-    public void fromLongToString_T8() {
+    public void fromLongToString_T11() {
         thrown.expect(IllegalArgumentException.class);
         GeoHash.fromLongToString(0);
     }
 
     @Test
-    public void fromLongToString_T9() {
+    public void fromLongToString_T12() {
         String s = GeoHash.fromLongToString(0x01);
         assertEquals("0", s);
+    }
+
+    @Test
+    public void heightDegrees_T13() {
+        double degree = GeoHash.heightDegrees(20);
+        assertEquals(1.5987211554602254E-13, degree, 1);
+    }
+
+    @Test
+    public void heightDegrees_T14() {
+        double degree = GeoHash.heightDegrees(2);
+        assertEquals(5.625, degree, 1);
     }
 
 }
