@@ -175,4 +175,19 @@ public class GeoHashTest {
         assertEquals(latlong.getLon(), decodeHash.getLon(), 1);
     }
 
+    // 1 3 4 5 6 8
+    @Test
+    public void coverBoundingBoxMaxHashes_T5() {
+        thrown.expect(NullPointerException.class);
+        Coverage coverage = GeoHash.coverBoundingBoxMaxHashes(23, 120, 20, 125, 0);
+        coverage.getHashes();
+    }
+
+    // 1 3 4 5 6 7 4 9
+    @Test
+    public void coverBoundingBoxMaxHashes_T6() {
+        Coverage coverage = GeoHash.coverBoundingBoxMaxHashes(23, 120, 23, 120, 4);
+        assertEquals("[wsj6fej2dwv2]", coverage.getHashes().toString());
+    }
+    
 }
