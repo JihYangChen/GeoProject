@@ -189,5 +189,23 @@ public class GeoHashTest {
         Coverage coverage = GeoHash.coverBoundingBoxMaxHashes(23, 120, 23, 120, 4);
         assertEquals("[wsj6fej2dwv2]", coverage.getHashes().toString());
     }
-    
+
+    @Test
+    public void fromLongToString_T7() {
+        thrown.expect(IllegalArgumentException.class);
+        GeoHash.fromLongToString(0xf);
+    }
+
+    @Test
+    public void fromLongToString_T8() {
+        thrown.expect(IllegalArgumentException.class);
+        GeoHash.fromLongToString(0);
+    }
+
+    @Test
+    public void fromLongToString_T9() {
+        String s = GeoHash.fromLongToString(0x01);
+        assertEquals("0", s);
+    }
+
 }
