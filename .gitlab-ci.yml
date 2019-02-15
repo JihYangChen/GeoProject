@@ -30,6 +30,7 @@ test:
   script: 
     - gradle check
     - gradle jacocoTestReport
+    - "cat build/jacocoHtml/index.html"
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: pull
